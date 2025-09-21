@@ -7,7 +7,7 @@ export default function Admissions() {
         {/* Title */}
         <h2 className="text-4xl font-heading text-primary mb-6 flex justify-center items-center gap-2">
           <FaUserGraduate className="text-accent text-4xl drop-shadow-md" />
-          Admissions <span className="text-accent">2025 – 26</span>
+          Admissions<span className="text-accent"></span>
         </h2>
         <p className="text-gray-600 text-lg mb-12 max-w-3xl mx-auto">
           We are excited to welcome new students to Dada Vikram Public School.  
