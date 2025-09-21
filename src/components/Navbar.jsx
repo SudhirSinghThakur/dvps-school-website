@@ -4,50 +4,48 @@ import { FaBars, FaTimes } from "react-icons/fa";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const location = useLocation(); // detect current route
+  const location = useLocation();
 
   const navLinks = [
     { to: "/", label: "Home" },
     { to: "/about", label: "About" },
     { to: "/academics", label: "Academics" },
-    // { to: "/gallery", label: "Gallery" },
+    { to: "/admissions", label: "Admissions" }, // 👈 ab normal link
     { to: "/contact", label: "Contact" },
-    // { to: "/admin", label: "Admin", isButton: true },
   ];
 
   return (
     <nav className="fixed top-0 left-0 w-full bg-white/90 backdrop-blur shadow-md z-50">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-3">
         {/* Logo */}
-        <Link to="/" className="flex items-center space-x-2">
-          <img src="/logo.png" alt="School Logo" className="h-12 drop-shadow-sm" />
-          <span className="text-2xl font-heading font-extrabold text-primary tracking-wide">
-            DVPS
-          </span>
-        </Link>
+        <div className="flex items-center gap-2">
+          <img src="/logo.png" alt="School Logo" className="w-12 h-12" />
+          <div>
+            <h1 className="text-[#174e2b] font-bold text-lg">DADA VIKRAM</h1>
+            <p className="text-gray-500 text-sm">PUBLIC SCHOOL</p>
+          </div>
+        </div>
 
         {/* Desktop Menu */}
-        <ul className="hidden md:flex space-x-8 font-medium text-gray-700">
+        <ul className="hidden md:flex space-x-8 font-medium text-gray-700 items-center">
           {navLinks.map(({ to, label }) => (
-            <li key={to}>
+            <li key={to} className="group relative">
               <Link
                 to={to}
-                className={`relative pb-1 transition ${
+                className={`pb-1 transition ${
                   location.pathname === to
                     ? "text-primary font-semibold"
                     : "hover:text-primary"
                 }`}
               >
                 {label}
-                {/* underline animation */}
-                <span
-                  className={`absolute left-0 bottom-0 h-0.5 bg-accent transition-all duration-300 ${
-                    location.pathname === to
-                      ? "w-full"
-                      : "w-0 group-hover:w-full"
-                  }`}
-                ></span>
               </Link>
+              {/* underline animation */}
+              <span
+                className={`absolute left-0 -bottom-0.5 h-0.5 bg-accent transition-all duration-300 ${
+                  location.pathname === to ? "w-full" : "w-0 group-hover:w-full"
+                }`}
+              ></span>
             </li>
           ))}
         </ul>
@@ -70,7 +68,7 @@ export default function Navbar() {
                 <Link
                   to={to}
                   onClick={() => setIsOpen(false)}
-                  className={`block py-1 ${
+                  className={`block py-2 ${
                     location.pathname === to
                       ? "text-primary font-semibold"
                       : "hover:text-primary"
