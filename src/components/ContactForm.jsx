@@ -1,38 +1,25 @@
-import { useState } from "react";
+import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
 
 export default function ContactForm() {
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
-  const [status, setStatus] = useState("");
-
-  const handleChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
-
-  const handleSubmit = async e => {
-    e.preventDefault();
-    setStatus("Sending...");
-    try {
-      const res = await fetch(import.meta.env.VITE_API_URL, {
-        method: "POST",
-        body: JSON.stringify({ type: "contact", ...formData }),
-        headers: { "Content-Type": "application/json" }
-      });
-      if (res.ok) {
-        setStatus("✅ Message Sent!");
-        setFormData({ name: "", email: "", message: "" });
-      } else {
-        setStatus("❌ Failed to send.");
-      }
-    } catch (err) {
-      setStatus("❌ Error: " + err.message);
-    }
-  };
-
   return (
-    <form onSubmit={handleSubmit} className="bg-white shadow-md p-6 rounded-lg max-w-lg mx-auto space-y-4">
-      <input type="text" name="name" placeholder="Your Name" value={formData.name} onChange={handleChange} required className="w-full border p-2 rounded" />
-      <input type="email" name="email" placeholder="Your Email" value={formData.email} onChange={handleChange} required className="w-full border p-2 rounded" />
-      <textarea name="message" placeholder="Your Message" value={formData.message} onChange={handleChange} required rows="4" className="w-full border p-2 rounded" />
-      <button type="submit" className="bg-primary text-white px-6 py-2 rounded">Send</button>
-      {status && <p className="text-center text-sm mt-2">{status}</p>}
-    </form>
+    <section id="contact" className="bg-[#f5f9f3] py-16">
+      <div className="max-w-6xl mx-auto px-4">
+        <h2 className="text-3xl font-bold text-center text-[#174e2b] mb-10">Contact Us</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          <div className="bg-white p-6 rounded-lg shadow flex gap-4 items-start">
+            <FaMapMarkerAlt className="text-[#174e2b]" size={28}/>
+            <div><h4 className="font-semibold">Location</h4><p>123 Churu Road, Sardarsahar</p></div>
+          </div>
+          <div className="bg-white p-6 rounded-lg shadow flex gap-4 items-start">
+            <FaPhoneAlt className="text-[#174e2b]" size={28}/>
+            <div><h4 className="font-semibold">Phone</h4><p>+91 118 1234567</p></div>
+          </div>
+          <div className="bg-white p-6 rounded-lg shadow flex gap-4 items-start">
+            <FaEnvelope className="text-[#174e2b]" size={28}/>
+            <div><h4 className="font-semibold">Email</h4><p>info@dadavikrampublicschool.com</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
