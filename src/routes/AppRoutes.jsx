@@ -10,9 +10,7 @@ import Admissions from "../pages/Admissions";
 import NoticeBoard from "../pages/NoticeBoard";
 import AdminLogin from "../pages/Admin/AdminLogin";
 import RequireAuth from "../components/RequireAuth";
-
-import AdminNotices from "../pages/admin/AdminNotices"; // ✅ real component import kar
-// ab tu dummy use kar raha tha
+import AdminNotices from "../pages/Admin/AdminNotices"; 
 
 function AdminDashboard() {
   return <h2 className="text-2xl text-[#174e2b]">Welcome Admin</h2>;
@@ -45,7 +43,7 @@ export default function AppRoutes() {
           }
         >
           <Route index element={<AdminDashboard />} />
-          <Route path="notices" element={<AdminNotices />} /> {/* ✅ sirf yaha */}
+          <Route path="notices" element={<AdminNotices />} />
         </Route>
       </Routes>
     </BrowserRouter>
