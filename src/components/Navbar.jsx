@@ -10,8 +10,9 @@ export default function Navbar() {
     { to: "/", label: "Home" },
     { to: "/about", label: "About" },
     { to: "/academics", label: "Academics" },
-    { to: "/admissions", label: "Admissions" }, // 👈 ab normal link
+    { to: "/gallery", label: "Gallery" },
     { to: "/contact", label: "Contact" },
+    { to: "/admissions", label: "Admissions" },
   ];
 
   return (
@@ -27,30 +28,39 @@ export default function Navbar() {
         </div>
 
         {/* Desktop Menu */}
-        <ul className="hidden md:flex space-x-8 font-medium text-gray-700 items-center">
+        <ul className="hidden md:flex items-center space-x-8 font-medium text-gray-700">
           {navLinks.map(({ to, label }) => (
-            <li key={to} className="group relative">
+            <li key={to}>
               <Link
                 to={to}
-                className={`pb-1 transition ${
+                className={`relative pb-1 transition ${
                   location.pathname === to
                     ? "text-primary font-semibold"
                     : "hover:text-primary"
                 }`}
               >
                 {label}
+                <span
+                  className={`absolute left-0 bottom-0 h-0.5 bg-accent transition-all duration-300 ${
+                    location.pathname === to ? "w-full" : "w-0 group-hover:w-full"
+                  }`}
+                ></span>
               </Link>
-              {/* underline animation */}
-              <span
-                className={`absolute left-0 -bottom-0.5 h-0.5 bg-accent transition-all duration-300 ${
-                  location.pathname === to ? "w-full" : "w-0 group-hover:w-full"
-                }`}
-              ></span>
             </li>
           ))}
+
+          {/* Admin Button */}
+          <li>
+            <Link
+              to="/admin"
+              className="bg-[#b48a2e] px-4 py-2 rounded-full text-white hover:bg-[#946d23] transition shadow-md"
+            >
+              Admin
+            </Link>
+          </li>
         </ul>
 
-        {/* Mobile Hamburger Icon */}
+        {/* Mobile Hamburger */}
         <button
           className="md:hidden text-2xl text-primary focus:outline-none"
           onClick={() => setIsOpen(!isOpen)}
@@ -68,7 +78,7 @@ export default function Navbar() {
                 <Link
                   to={to}
                   onClick={() => setIsOpen(false)}
-                  className={`block py-2 ${
+                  className={`block py-1 ${
                     location.pathname === to
                       ? "text-primary font-semibold"
                       : "hover:text-primary"
@@ -78,6 +88,17 @@ export default function Navbar() {
                 </Link>
               </li>
             ))}
+
+            {/* Mobile Admin Button */}
+            <li>
+              <Link
+                to="/admin"
+                onClick={() => setIsOpen(false)}
+                className="block bg-[#b48a2e] text-white text-center px-4 py-2 rounded-full hover:bg-[#946d23] transition shadow-md"
+              >
+                Admin
+              </Link>
+            </li>
           </ul>
         </div>
       )}
